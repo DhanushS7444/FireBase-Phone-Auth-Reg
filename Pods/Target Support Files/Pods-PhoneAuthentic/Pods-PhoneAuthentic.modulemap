@@ -1,0 +1,6 @@
+framework module Pods_PhoneAuthentic {
+  umbrella header "Pods-PhoneAuthentic-umbrella.h"
+
+  export *
+  module * { export * }
+}
