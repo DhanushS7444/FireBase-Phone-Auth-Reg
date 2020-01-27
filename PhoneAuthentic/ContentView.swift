@@ -22,7 +22,7 @@ struct ContentView: View {
                 }
             }
         }.onAppear{
-            NotificationCenter.default.addObserver(forName: NSNotification.Name("statusChanged"), object: nil, queue: .main){
+            NotificationCenter.default.addObserver(forName: NSNotification.Name("statusChange"), object: nil, queue: .main){
                 (_) in
                 let status = UserDefaults.standard.value(forKey: "status") as? Bool ?? false
                 self.status = status
@@ -108,7 +108,6 @@ struct SecondPage : View {
     @State var msg = ""
     @State var alert  = false
     var body : some View {
-        
         ZStack(alignment: .topLeading) {
             GeometryReader{_ in
                 VStack(spacing : 20) {
