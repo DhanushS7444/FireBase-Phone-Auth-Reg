@@ -49,7 +49,6 @@ struct FirstPage : View {
         ZStack(alignment: .topLeading) {
             GeometryReader{_ in
                 VStack(spacing : 20) {
-                    
                     Text("Verify Your Number")
                         .font(.largeTitle)
                         .fontWeight(.heavy)
@@ -64,11 +63,13 @@ struct FirstPage : View {
                             .frame(width: 45)
                             .padding()
                             .background(Color("Color"))
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
                         
                         TextField("Number", text: self.$no)
                             .keyboardType(.numberPad)
                             .padding()
                             .background(Color("Color"))
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
                     }.padding(.top,15)
                     NavigationLink(destination: SecondPage(show: self.$show, ID: self.$ID), isActive: self.$show){
                         Button(action: {
@@ -111,7 +112,6 @@ struct SecondPage : View {
         ZStack(alignment: .topLeading) {
             GeometryReader{_ in
                 VStack(spacing : 20) {
-                    
                     Text("Verification Code")
                         .font(.largeTitle)
                         .fontWeight(.heavy)
@@ -124,6 +124,7 @@ struct SecondPage : View {
                         .keyboardType(.numberPad)
                         .padding()
                         .background(Color("Color"))
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
                         .padding(.top,15)
                     Button(action: {
                         let credentials =  PhoneAuthProvider.provider().credential(withVerificationID: self.ID, verificationCode: self.code)
@@ -167,7 +168,7 @@ struct Home : View {
             Text("Home")
             Button(action: {
                 try! Auth.auth().signOut()
-                UserDefaults.standard.set(true, forKey: "status")
+                UserDefaults.standard.set(false, forKey: "status")
                 NotificationCenter.default.post(name: NSNotification.Name("statusChange"), object: nil)
             }){
                 Text("Logout")
