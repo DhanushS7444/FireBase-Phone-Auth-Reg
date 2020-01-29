@@ -10,6 +10,7 @@
 		26344B4EBDF683C9973979E3 /* Pods_PhoneAuthentic_PhoneAuthenticUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 389C96592E8A58AB115DCA96 /* Pods_PhoneAuthentic_PhoneAuthenticUITests.framework */; };
 		2A89A1A8AE9E2DDA81A85A8C /* Pods_PhoneAuthenticTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADE1EE84E9148B46EFDC3513 /* Pods_PhoneAuthenticTests.framework */; };
 		9E247025523D0F2B3CCA24AB /* Pods_PhoneAuthentic.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75D3CC8E0DA83022E7EB43FF /* Pods_PhoneAuthentic.framework */; };
+		C15E83C823E1602A00403695 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C15E83C723E1602A00403695 /* GoogleService-Info.plist */; };
 		C1A838E623DAEDAA008B3A80 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A838E523DAEDAA008B3A80 /* AppDelegate.swift */; };
 		C1A838E823DAEDAA008B3A80 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A838E723DAEDAA008B3A80 /* SceneDelegate.swift */; };
 		C1A838EA23DAEDAA008B3A80 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A838E923DAEDAA008B3A80 /* ContentView.swift */; };
@@ -18,7 +19,6 @@
 		C1A838F223DAEDAC008B3A80 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1A838F023DAEDAC008B3A80 /* LaunchScreen.storyboard */; };
 		C1A838FD23DAEDAC008B3A80 /* PhoneAuthenticTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A838FC23DAEDAC008B3A80 /* PhoneAuthenticTests.swift */; };
 		C1A8390823DAEDAC008B3A80 /* PhoneAuthenticUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A8390723DAEDAC008B3A80 /* PhoneAuthenticUITests.swift */; };
-		C1A8391623DAF201008B3A80 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C1A8391523DAF201008B3A80 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +47,7 @@
 		A83EE7F0F13BDEB82D0FFE2B /* Pods-PhoneAuthenticTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhoneAuthenticTests.release.xcconfig"; path = "Target Support Files/Pods-PhoneAuthenticTests/Pods-PhoneAuthenticTests.release.xcconfig"; sourceTree = "<group>"; };
 		ADE1EE84E9148B46EFDC3513 /* Pods_PhoneAuthenticTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_PhoneAuthenticTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C0449EFD831627C0E3602E91 /* Pods-PhoneAuthenticTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhoneAuthenticTests.debug.xcconfig"; path = "Target Support Files/Pods-PhoneAuthenticTests/Pods-PhoneAuthenticTests.debug.xcconfig"; sourceTree = "<group>"; };
+		C15E83C723E1602A00403695 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C1A838E223DAEDAA008B3A80 /* PhoneAuthentic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PhoneAuthentic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1A838E523DAEDAA008B3A80 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C1A838E723DAEDAA008B3A80 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -61,7 +62,6 @@
 		C1A8390323DAEDAC008B3A80 /* PhoneAuthenticUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhoneAuthenticUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1A8390723DAEDAC008B3A80 /* PhoneAuthenticUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhoneAuthenticUITests.swift; sourceTree = "<group>"; };
 		C1A8390923DAEDAC008B3A80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C1A8391523DAF201008B3A80 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		D95081693561F4919FC55294 /* Pods-PhoneAuthentic.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhoneAuthentic.release.xcconfig"; path = "Target Support Files/Pods-PhoneAuthentic/Pods-PhoneAuthentic.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -128,7 +128,7 @@
 		C1A838E423DAEDAA008B3A80 /* PhoneAuthentic */ = {
 			isa = PBXGroup;
 			children = (
-				C1A8391523DAF201008B3A80 /* GoogleService-Info.plist */,
+				C15E83C723E1602A00403695 /* GoogleService-Info.plist */,
 				C1A838E523DAEDAA008B3A80 /* AppDelegate.swift */,
 				C1A838E723DAEDAA008B3A80 /* SceneDelegate.swift */,
 				C1A838E923DAEDAA008B3A80 /* ContentView.swift */,
@@ -289,9 +289,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				C1A838F223DAEDAC008B3A80 /* LaunchScreen.storyboard in Resources */,
-				C1A8391623DAF201008B3A80 /* GoogleService-Info.plist in Resources */,
 				C1A838EF23DAEDAC008B3A80 /* Preview Assets.xcassets in Resources */,
 				C1A838EC23DAEDAC008B3A80 /* Assets.xcassets in Resources */,
+				C15E83C823E1602A00403695 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
