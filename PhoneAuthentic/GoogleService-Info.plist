@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>218005397972-k0j1na7qq4qksumikcchb2n7fuaiboit.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.218005397972-k0j1na7qq4qksumikcchb2n7fuaiboit</string>
+	<key>API_KEY</key>
+	<string>AIzaSyC00aUGu7EXLvI0LAVxeEp_TNCYX-MKNSo</string>
+	<key>GCM_SENDER_ID</key>
+	<string>218005397972</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>SwiftUI.PhoneAuthentic</string>
+	<key>PROJECT_ID</key>
+	<string>phoneauthentication-dbaba</string>
+	<key>STORAGE_BUCKET</key>
+	<string>phoneauthentication-dbaba.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:218005397972:ios:e6077dde229e8b4244f641</string>
+	<key>DATABASE_URL</key>
+	<string>https://phoneauthentication-dbaba.firebaseio.com</string>
+</dict>
+</plist>

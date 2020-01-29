@@ -8,6 +8,8 @@
 
 import SwiftUI
 import Firebase
+import FirebaseFirestore
+import FirebaseStorage
 
 struct ContentView: View {
     @State var status = UserDefaults.standard.value(forKey: "status") as? Bool ?? false
@@ -73,6 +75,8 @@ struct FirstPage : View {
                     }.padding(.top,15)
                     NavigationLink(destination: SecondPage(show: self.$show, ID: self.$ID), isActive: self.$show){
                         Button(action: {
+                            // remove this when u are using real phone numbers
+                            //Auth.auth().settings?.isAppVerificationDisabledForTesting = true
                             PhoneAuthProvider.provider().verifyPhoneNumber("+"+self.ccode+self.no, uiDelegate: nil){(ID, err) in
                                 if err != nil{
                                     self.msg = (err?.localizedDescription)!
@@ -108,6 +112,8 @@ struct SecondPage : View {
     @Binding var ID : String
     @State var msg = ""
     @State var alert  = false
+    @State var creation = false
+    @State var loading = false
     var body : some View {
         ZStack(alignment: .topLeading) {
             GeometryReader{_ in
@@ -126,26 +132,46 @@ struct SecondPage : View {
                         .background(Color("Color"))
                         .clipShape(RoundedRectangle(cornerRadius: 10))
                         .padding(.top,15)
-                    Button(action: {
-                        let credentials =  PhoneAuthProvider.provider().credential(withVerificationID: self.ID, verificationCode: self.code)
-                        Auth.auth().signIn(with: credentials) {(res, err) in
-                            if err != nil{
-                                self.msg = (err?.localizedDescription)!
-                                self.alert.toggle()
-                                return
-                            }
-                            UserDefaults.standard.set(true, forKey: "status")
-                            NotificationCenter.default.post(name: NSNotification.Name("statusChange"), object: nil)
+                    
+                    if self.loading{
+                        HStack{
+                            Spacer()
+                            Indicator()
+                            Spacer()
+                            
                         }
-                    }){
-                        Text("Verify")
-                            .frame(width: UIScreen.main.bounds.width - 30  , height: 50)
-                    }.foregroundColor(.white)
-                        .background(Color.orange)
-                        .cornerRadius(10)
-                        .navigationBarTitle("")
-                        .navigationBarHidden(true)
-                        .navigationBarHidden(true)
+                    }
+                    else
+                    {
+                        Button(action: {
+                            self.loading.toggle()
+                            let credentials =  PhoneAuthProvider.provider().credential(withVerificationID: self.ID, verificationCode: self.code)
+                            Auth.auth().signIn(with: credentials) {(res, err) in
+                                if err != nil{
+                                    self.msg = (err?.localizedDescription)!
+                                    self.alert.toggle()
+                                    return
+                                }
+                                checkUser{(exists, user) in
+                                    if exists{
+                                        UserDefaults.standard.set(true, forKey: "status")
+                                        UserDefaults.standard.set(user, forKey: "UserName")
+                                        NotificationCenter.default.post(name: NSNotification.Name("statusChange"), object: nil)
+                                    }
+                                    else{
+                                        self.loading.toggle()
+                                        self.creation.toggle()
+                                    }
+                                }
+                                
+                            }
+                        }){
+                            Text("Verify")
+                                .frame(width: UIScreen.main.bounds.width - 30  , height: 50)
+                        }.foregroundColor(.white)
+                            .background(Color.orange)
+                            .cornerRadius(10)
+                    }
                 }
             }
             Button(action: {
@@ -156,8 +182,14 @@ struct SecondPage : View {
             }.foregroundColor(.orange)
             
         }.padding()
+            .navigationBarTitle("")
+            .navigationBarHidden(true)
+            .navigationBarHidden(true)
             .alert(isPresented: $alert) {
                 Alert(title: Text("Error"), message: Text(self.msg), dismissButton: .default(Text("Ok")))
+        }
+        .sheet(isPresented: self.$creation){
+            AccountCreation(show: self.$creation)
         }
     }
 }
@@ -165,6 +197,7 @@ struct SecondPage : View {
 struct Home : View {
     var body : some View{
         VStack{
+            Text("Welcome \(UserDefaults.standard.value(forKey: "UserName") as! String)")
             Text("Home")
             Button(action: {
                 try! Auth.auth().signOut()
@@ -174,5 +207,43 @@ struct Home : View {
                 Text("Logout")
             }
         }
+    }
+}
+
+func checkUser(completion : @escaping (Bool, String) -> Void) {
+    let db = Firestore.firestore()
+    db.collection("users").getDocuments{(snap, err) in
+        if err != nil {
+            print((err?.localizedDescription)!)
+            return
+        }
+        for i in snap!.documents {
+            if i.documentID == Auth.auth().currentUser?.uid  {
+                completion(true,i.get("name") as! String)
+                return
+            }
+        }
+        completion(false,"")
+    }
+}
+
+struct AccountCreation : View {
+    @Binding var show : Bool
+    var body : some View {
+        Text("Creation")
+    }
+}
+
+struct Indicator : UIViewRepresentable {
+    
+    func makeUIView(context: UIViewRepresentableContext<Indicator>) -> UIActivityIndicatorView {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.startAnimating()
+        return indicator
+        
+    }
+    
+    func updateUIView(_ uiView: UIActivityIndicatorView, context: UIViewRepresentableContext<Indicator>) {
+        
     }
 }

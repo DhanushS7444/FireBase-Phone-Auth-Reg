@@ -6,6 +6,8 @@ target 'PhoneAuthentic' do
   use_frameworks!
 
 pod 'Firebase/Auth'
+pod 'Firebase/Firestore'
+pod 'Firebase/Storage'
 
   # Pods for PhoneAuthentic
 
