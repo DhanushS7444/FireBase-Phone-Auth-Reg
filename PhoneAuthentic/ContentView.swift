@@ -32,6 +32,47 @@ struct ContentView: View {
         }
     }
 }
+struct ImagePicker : UIViewControllerRepresentable {
+    
+    @Binding var picker : Bool
+    @Binding var imageData : Data
+    
+    func makeCoordinator() -> ImagePicker.Coordinator {
+        return ImagePicker.Coordinator(parent1.self)
+    }
+    
+    func makeUIViewController(context: UIViewControllerRepresentableContext<ImagePicker>) -> UIImagePickerController {
+        let picker = UIImagePickerController()
+        picker.sourceType = .photoLibrary
+        picker.delegate = context.coordinator
+        return picker
+    }
+    
+    func updateUIViewController(_ uiViewController: UIImagePickerController, context: UIViewControllerRepresentableContext<ImagePicker>) {
+        
+    }
+    
+    class Coordinator : NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+        var parent : ImagePicker
+        init(parent1 : ImagePicker) {
+            parent = parent1
+        }
+        
+        func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+            self.parent.picker.toggle()
+        }
+        
+        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+            let image = info[.originalImage] as! UIImage
+            let data = image.jpegData(compressionQuality: 0.45)
+            self.parent.imageData = data!
+            self.parent.picker.toggle()
+        }
+        
+    }
+}
+
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
@@ -229,8 +270,89 @@ func checkUser(completion : @escaping (Bool, String) -> Void) {
 
 struct AccountCreation : View {
     @Binding var show : Bool
+    @State var name = ""
+    @State var about = ""
+    @State var picker = false
+    @State var loading = false
+    @State var alert = false
+    @State var imageData: Data = .init(count : 0)
     var body : some View {
-        Text("Creation")
+        VStack(alignment: .leading, spacing: 15) {
+            Text("Awesome !!! Crate an Account")
+                .font(.title)
+            HStack{
+                Spacer()
+                Button(action : {
+                    self.picker.toggle()
+                }){
+                    if self.imageData.count == 0 {
+                        Image(systemName: "person.crop.circle.badge.plus")
+                            .resizable()
+                            .frame(width: 90, height: 70)
+                            .foregroundColor(.gray)
+                    }else{
+                        Image(uiImage : UIImage(data: self.imageData)!)
+                            .resizable()
+                            .renderingMode(.original)
+                            .frame(width: 90, height: 70)
+                            .clipShape(Circle())
+                    }
+                }
+                Spacer()
+            }
+            .padding(.vertical, 15)
+            
+            Text("Enter User Name")
+                .font(.body)
+                .foregroundColor(.gray)
+                .padding(.top, 12)
+            
+            TextField("Name", text: self.$name)
+                .keyboardType(.numberPad)
+                .padding()
+                .background(Color("Color"))
+                .clipShape(RoundedRectangle(cornerSize: 10))
+                .padding(.top, 15)
+            
+            Text("About You")
+                .font(.body)
+                .foregroundColor(.gray)
+                .padding(.top, 12)
+            
+            TextField("About", text: self.$about)
+                .keyboardType(.numberPad)
+            .padding()
+            .background(Color("Color"))
+                .clipShape(RoundedRectangle(cornerSize: 10))
+                .padding(.top, 15)
+            
+            if self.loading{
+                HStack{
+                    Spacer()
+                    Indicator()
+                    Spacer()
+                    
+                }
+            }else{
+                Button(action : {
+                    if self.name != "" && self.about != ""&& self.imageData.count != 0{
+                        self.loading.toggle()
+                    
+                    }else{
+                        self.alert.toggle()
+                    }
+                    
+                    
+                    
+                }){
+                    Text("Create")
+                        .frame(width: UIScreen.main.bounds.width - 30, height: 50)
+                }.foregroundColor(Color.white)
+                    .background(Color.orange)
+                .cornerRadius(10)
+            }
+            
+        }
     }
 }
 
@@ -246,4 +368,9 @@ struct Indicator : UIViewRepresentable {
     func updateUIView(_ uiView: UIActivityIndicatorView, context: UIViewRepresentableContext<Indicator>) {
         
     }
+}
+
+
+func createUser(name : String, about: String, imageData : Data, Completion : @escaping(Bool) -> Void){
+    let db = Firestore.firestore()
 }
