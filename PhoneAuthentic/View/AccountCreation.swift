@@ -75,7 +75,7 @@ struct AccountCreation : View {
             else{
                 Button(action: {
                     if self.name != "" && self.about != "" && self.imagedata.count != 0{
-                        self.loading.toggle()
+//                        self.loading.toggle()
                         createUser(name: self.name, about: self.about, imageData: self.imagedata) { (status) in
                             if status{
                                 self.show.toggle()

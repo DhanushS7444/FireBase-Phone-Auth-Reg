@@ -26,7 +26,7 @@ func createUser(name: String,about : String,imageData : Data,completion : @escap
                 print((err?.localizedDescription)!)
                 return
             }
-            db.collection("users").document(uid!).setData(["name":name,"about":about,"pic":"(url!)","uid":uid!]) { (err) in
+            db.collection("users").document(uid!).setData(["name":name,"about":about,"pic":"\(url!)","uid":uid!]) { (err) in
                 if err != nil{
                     print((err?.localizedDescription)!)
                     return

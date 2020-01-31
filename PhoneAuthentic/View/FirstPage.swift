@@ -48,7 +48,7 @@ struct FirstPage : View {
                     NavigationLink(destination: SecondPage(show: self.$show, ID: self.$ID), isActive: self.$show){
                         Button(action: {
                             // remove this when u are using real phone numbers
-                            //Auth.auth().settings?.isAppVerificationDisabledForTesting = true
+                            Auth.auth().settings?.isAppVerificationDisabledForTesting = true
                             PhoneAuthProvider.provider().verifyPhoneNumber("+"+self.ccode+self.no, uiDelegate: nil){(ID, err) in
                                 if err != nil{
                                     self.msg = (err?.localizedDescription)!
